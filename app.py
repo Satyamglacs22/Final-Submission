@@ -7,24 +7,28 @@ model_logistic = pickle.load(open('model_diabetes.sav', 'rb'))
 
 # Basic UI
 st.title("Diabetes Prediction")
+st.write("""
+This is a Simple Web app to Predict whether a Person has diabetes or not.To Predict,
+Please input the required values and click on the 'Predict' Button.
+""")
+
 st.subheader("Please Enter the Required Information:")
 
 # Input fields
 model_choice = st.selectbox('Select the Model', ['Logistic Regression'])
 
-Pregnancies = st.number_input('Enter the Pregnancies value', min_value=0, step=1, key='Pregnancies')
-Glucose = st.number_input('Enter the Glucose value', min_value=0.0, key='Glucose')
-BloodPressure = st.number_input('Enter the Blood Pressure value', min_value=0.0, key='BloodPressure')
-SkinThickness = st.number_input('Enter the Skin Thickness value', min_value=0.0, key='SkinThickness')
-Insulin = st.number_input('Enter the Insulin value', min_value=0.0, key='Insulin')
-BMI = st.number_input('Enter the BMI value', min_value=0.0, key='BMI')
-DiabetesPedigreeFunction = st.number_input('Enter the Diabetes Pedigree Function value', min_value=0.0, key='DiabetesPedigreeFunction')
-Age = st.number_input('Enter the Age value', min_value=0, step=1, key='Age')
+age = st.number_input('Age', min_value=10, max_value=100, step=1)
+bmi = st.number_input('BMI', min_value=0.0, max_value=70.0, step=0.1)
+pregnancies = st.number_input('Pregnancies', min_value=0, max_value=20, step=1)
+glucose = st.number_input('Glucose', min_value=0, max_value=200, step=1)
+blood_pressure = st.number_input('Blood Pressure', min_value=20, max_value=200, step=1)
+skin_thickness = st.number_input('Skin Thickness', min_value=0, max_value=100, step=1)
+insulin = st.number_input('Insulin', min_value=0, max_value=900, step=1)
 
 # Prediction
 diabetes_diagnosis = ''
 
-if st.button('Diabetes Prediction Test', key='predict'):
+if st.button('Predict', key='predict'):
     # Select the model
     if model_choice == 'Logistic Regression':
         model = model_logistic
